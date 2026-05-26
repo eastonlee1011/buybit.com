@@ -1,42 +1,55 @@
 @import url("../styles.css");
+/* Import base styles then apply final mobile polish */
+@supports (-webkit-touch-callout: none) {
+	html, body { -webkit-text-size-adjust: 100%; }
+}
 
-/* Mobile refinements: compact yet readable */
-html, body { font-size: 14px; }
-body { font-size: 14px; }
+html, body { font-size: 13px; }
+body { font-size: 13px; }
 
-.legal-panel { width: 100% !important; border-radius: 16px !important; }
-.legal-header { padding: 14px !important; }
+/* Panel sizing and breathing room */
+.legal-panel { width: calc(100% - 24px) !important; margin: 12px; border-radius: 16px !important; }
+.legal-header { padding: 12px !important; }
 .legal-body { padding: 12px !important; }
 
+/* Headings scaled for mobile */
 .doc-title { font-size: 1rem; }
-.doc-subtitle { font-size: 0.9rem; }
-.doc-heading { font-size: 0.95rem; }
+.doc-subtitle { font-size: 0.88rem; color: var(--muted); }
+.doc-heading { font-size: 0.96rem; }
 
-/* Keep table as table but tighten spacing and allow horizontal scroll when needed */
-.legal-doc { overflow-x: auto; }
-.compliance-table { border: 0; table-layout: fixed; width: 100%; }
+/* Ensure the document area scrolls horizontally when complex tables are present */
+.legal-doc { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Tables: compact spacing, fixed layout to keep columns aligned */
+.compliance-table { border: 0; table-layout: fixed; width: 100%; font-size: 0.88rem; border-collapse: collapse; }
 .compliance-table thead { display: table-header-group; }
-.compliance-table th, .compliance-table td { padding: 8px 10px; }
-.compliance-table th { font-size: 0.88rem; }
-.compliance-table td { font-size: 0.9rem; }
-.compliance-table td:nth-child(2), .compliance-table th:nth-child(2) { width: 110px; text-align: right; white-space: nowrap; }
+.compliance-table th, .compliance-table td { padding: 8px 10px; border: 1px solid rgba(255,255,255,0.06); }
+.compliance-table th { font-size: 0.86rem; font-weight: 600; }
+.compliance-table td { font-size: 0.86rem; line-height: 1.45; }
+.compliance-table td:nth-child(2), .compliance-table th:nth-child(2) { width: 100px; text-align: right; white-space: nowrap; }
 
-/* Small, comfortable legal text */
-.legal-doc pre { line-height: 1.6; font-size: 13px; }
+/* Reduce contract text size but keep readable line-height */
+.legal-doc pre { line-height: 1.45; font-size: 12.5px; margin: 0; white-space: pre-wrap; word-break: break-word; }
 
-/* Buttons and actions full width for touch targets */
-.btn { width: 100%; }
-.legal-actions { flex-direction: column; gap: 10px; align-items: stretch; }
+/* Touch-friendly buttons */
+.btn { width: 100%; padding: 12px 14px; font-size: 0.95rem; }
+.legal-actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
 
-/* Reduce header elements spacing to avoid compression */
-.legal-header > div:first-child { flex: 1 1 auto; }
-.legal-badge { margin-top: 6px; }
+/* Meta data compactness */
+.doc-meta p { font-size: 0.82rem; margin: 4px 0; color: var(--muted); }
 
-/* Images scale down on small screens */
-.nav-logo { width: 30px; height: 30px; }
+/* Minor UI tweaks */
+.nav-logo { width: 28px; height: 28px; }
+.legal-kicker { padding: 6px 10px; font-size: 10px; }
 
-/* Preserve color, weight and overall interface but avoid cramped layouts */
-.doc-meta p { font-size: 0.85rem; margin: 2px 0; }
+/* Very small screens adjustments */
+@media (max-width: 360px) {
+	html, body { font-size: 12px; }
+	.compliance-table td:nth-child(2), .compliance-table th:nth-child(2) { width: 90px; }
+	.legal-doc pre { font-size: 12px; }
+}
 
-/* Ensure pre-wrap doesn't overflow horizontally */
-.legal-doc pre { white-space: pre-wrap; word-break: break-word; }
+@media (min-width: 361px) and (max-width: 420px) {
+	html, body { font-size: 13px; }
+	.compliance-table td:nth-child(2), .compliance-table th:nth-child(2) { width: 100px; }
+}
